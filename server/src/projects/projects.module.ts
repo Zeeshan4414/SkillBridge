@@ -3,6 +3,7 @@ import { ProjectsController } from './projects.controller';
 import { ProjectsService } from './projects.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Project, ProjectSchema } from './Schema/projects.schema';
+import { NotificationsModule } from 'src/notifcations/notifications.module';
 
 @Module({
    imports: [
@@ -10,8 +11,10 @@ import { Project, ProjectSchema } from './Schema/projects.schema';
       {
         name: Project.name,
         useFactory: () => ProjectSchema
-      }
-    ])
+      },
+      
+    ]),
+    NotificationsModule
    ],
   controllers: [ProjectsController],
   providers: [ProjectsService]

@@ -3,7 +3,7 @@ import { Types } from "mongoose";
 
 
 @Schema({timestamps:true})
-export class notification{
+export class Notification{
     @Prop({required: true})
     message: string;
 
@@ -14,4 +14,4 @@ export class notification{
     read: boolean;
 }
 export type NotificationDocument= Notification & Document;
-export const NotificationSchema= SchemaFactory.createForClass(notification);
+export const NotificationSchema= SchemaFactory.createForClass(Notification);
