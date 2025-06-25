@@ -14,13 +14,87 @@ async create(data:{title:string, description?:string, ownerId:string}) {
     return await this.projectModel.create(data); // Save the project to the database
 
 }
-async findAll(){
-    return await this.projectModel.find().exec(); // Find all projects
+async findAll(
+    page: number,
+    limit: number,
+    search?: string,
+    sortBy?: string,
+    order?: string
+){
+    const skip = (page - 1) * limit;
+  
+    // 🔍 Build the filter
+    const filter: any = {}
+  
+    // Add search on title (case-insensitive)
+    if (search) {
+      filter.title = { $regex: search, $options: 'i' };
+    }
+  
+    // 🔄 Build sort object (e.g., { title: 1 })
+    const sortOptions: any = {};
+    if (sortBy) {
+      sortOptions[sortBy] = order === 'desc' ? -1 : 1;
+    }
+  
+    // 🚀 Fetch paginated data and total count
+    const [projects, total] = await Promise.all([
+      this.projectModel.find(filter).sort(sortOptions).skip(skip).limit(limit).exec(),
+      this.projectModel.countDocuments(filter).exec(),
+    ]);
+  
+    return {
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+      totalItems: total,
+      projects,
+    };
+
 }
 async findOne(id: string){
     return await this.projectModel.findById(id).exec(); // Find a project by ID
 
 }
+async findUsersProjects(
+    userId: string,
+    role: string,
+    page: number,
+    limit: number,
+    search?: string,
+    sortBy?: string,
+    order?: string
+  ) {
+    const skip = (page - 1) * limit;
+  
+    // 🔍 Build the filter
+    const filter: any = {}
+  
+    // Add search on title (case-insensitive)
+    if (search) {
+      filter.title = { $regex: search, $options: 'i' };
+    }
+  
+    // 🔄 Build sort object (e.g., { title: 1 })
+    const sortOptions: any = {};
+    if (sortBy) {
+      sortOptions[sortBy] = order === 'desc' ? -1 : 1;
+    }
+  
+    // 🚀 Fetch paginated data and total count
+    const [projects, total] = await Promise.all([
+      this.projectModel.find(filter).sort(sortOptions).skip(skip).limit(limit).exec(),
+      this.projectModel.countDocuments(filter).exec(),
+    ]);
+  
+    return {
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+      totalItems: total,
+      projects,
+    };
+  }
 async update(id: string, userId: string, role: string, updateDate: any) {
 
     const project = await this.findOne(id); // Find the project by ID
