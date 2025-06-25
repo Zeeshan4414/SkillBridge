@@ -4,7 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ProjectsModule } from './projects/projects.module';
-import { NotifcationsModule } from './notifcations/notifcations.module';
+import { NotifcationsModule } from './notifcations/notifications.module';
 
 
 @Module({

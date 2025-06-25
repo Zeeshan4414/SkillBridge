@@ -2,16 +2,27 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { Project, ProjectDocument } from './Schema/projects.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { NotificationsService } from 'src/notifcations/notifications.service';
 
 @Injectable()
 export class ProjectsService {
 
 constructor(
-    @InjectModel(Project.name) private projectModel: Model<ProjectDocument>)
+    @InjectModel(Project.name) private projectModel: Model<ProjectDocument>,
+    private readonly notificationsService: NotificationsService
+  )
     {}
 
 async create(data:{title:string, description?:string, ownerId:string}) {
-    return await this.projectModel.create(data); // Save the project to the database
+    const project= await this.projectModel.create(data); // Save the project to the database
+
+    await this.notificationsService.create(
+      `The Project "${project.title}" Crated Successfully!`,
+      project.ownerId // Notify the owner of the project creation
+    )
+    return project; // Return the created project
+
+
 
 }
 async findAll(
