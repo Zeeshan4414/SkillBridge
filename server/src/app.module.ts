@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ProjectsModule } from './projects/projects.module';
 import { NotificationsModule } from './notifcations/notifications.module';
+import { GoalsModule } from './goals/goals.module';
 
 
 @Module({
@@ -26,6 +27,7 @@ import { NotificationsModule } from './notifcations/notifications.module';
     AuthModule,
     ProjectsModule,
     NotificationsModule,
+    GoalsModule
   ],
   controllers: [],
   providers: [],
