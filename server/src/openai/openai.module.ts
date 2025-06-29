@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { OpenaiService } from './openai.service';
+import { GroqService } from './openai.service';
+// import { OpenaiService } from './openai.service';
 
 @Module({
-  providers: [OpenaiService],
-  exports: [OpenaiService],
+  providers: [GroqService],
+  exports: [GroqService],
 })
 export class OpenaiModule {}

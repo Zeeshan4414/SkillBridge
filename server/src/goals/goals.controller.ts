@@ -18,6 +18,14 @@ export class GoalsController {
             createdBy: req.user.userId
     })
     }
+    @Post('/generate-from-ai/:projectId')
+    async generateFromAi(@Param('projectId') projectId: string, @Req() req){
+        console.log('projectId:', projectId);
+console.log('user:', req.user);
+
+        return await this.goalsService.generateGoalFromAi(projectId, req.user.userId);
+    }
+
 
     @Get('/:projectId')
     async getGoals(@Param('projectId') projectId: string){

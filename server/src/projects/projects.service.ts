@@ -79,7 +79,9 @@ async findUsersProjects(
     const skip = (page - 1) * limit;
   
     // 🔍 Build the filter
-    const filter: any = {}
+    const filter: any = {
+      ownerId: userId, // ✅ Filter by the logged-in user's projects
+    };
   
     // Add search on title (case-insensitive)
     if (search) {

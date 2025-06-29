@@ -38,10 +38,7 @@ async findAll(
     ); // Retrieve all projects
 }
 
-@Get('/:id')
-async findOne(@Param('id') id:string){
-    return await this.projectsService.findOne(id); // Retrieve a project by ID
-}
+
 
 @Get('/my-projects')
 async findMyProjects(
@@ -54,7 +51,7 @@ async findMyProjects(
   ) {
     const userId = req.user.userId;
     const role = req.user.role;
-  
+    console.log('User ID:', userId, 'Role:', role);
     const pageNum = parseInt(page) || 1;
     const limitNum = parseInt(limit) || 10;
   
@@ -67,6 +64,11 @@ async findMyProjects(
       sortBy,
       order
     );
+  }
+
+  @Get('/:id')
+  async findOne(@Param('id') id:string){
+      return await this.projectsService.findOne(id); // Retrieve a project by ID
   }
 @Patch('/:id')
 async update(@Param('id') id: string, @Body() body: any, @Req() req) {
