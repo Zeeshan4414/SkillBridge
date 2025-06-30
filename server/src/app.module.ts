@@ -7,6 +7,7 @@ import { ProjectsModule } from './projects/projects.module';
 import { NotificationsModule } from './notifcations/notifications.module';
 import { GoalsModule } from './goals/goals.module';
 import { OpenaiModule } from './openai/openai.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 @Module({
@@ -29,7 +30,8 @@ import { OpenaiModule } from './openai/openai.module';
     ProjectsModule,
     NotificationsModule,
     GoalsModule,
-    OpenaiModule
+    OpenaiModule,
+    DashboardModule
   ],
   controllers: [],
   providers: [],
