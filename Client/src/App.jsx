@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import Register from "./auth/register";
 import Login from "./auth/login";
 import "./App.css";
@@ -33,6 +33,7 @@ function App() {
       {" "}
       <GlobalLoader />
       <Routes>
+      <Route path="/" element={<Navigate to={"/login"}/>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
 
