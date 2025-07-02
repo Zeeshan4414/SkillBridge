@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance= axios.create({
-    baseURL: "https://skillbridge-server.vercel.app/ ",  //Nest Backend URL
+    baseURL: "https://localhost:3000/ ",  //Nest Backend URL
 })
 
 instance.interceptors.request.use((config) =>{
