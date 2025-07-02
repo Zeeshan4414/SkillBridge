@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance= axios.create({
-    baseURL: "http://localhost:3000" || "https://skill-bridge-server-8xuqp3uhj-zeeshan4414s-projects.vercel.app/",  //Nest Backend URL
+    baseURL: "https://skill-bridge-server-8xuqp3uhj-zeeshan4414s-projects.vercel.app/",  //Nest Backend URL
 })
 
 instance.interceptors.request.use((config) =>{
